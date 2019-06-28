@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 14:17:27 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:41:09 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,27 @@ int
 			return (0);
 		index = 0;
 		if (str[index] == '\0')
+		{
+			free(str);
 			return (0);
-		j = -1;
+		}
+		j = 0;
 		while (str[index] != '\0')
 		{
-			if (!(str[index] == '.' || str[index] == '*'))
+			if (str[index] != '.' && str[index] != '*')
+			{
+				free(str);
 				return (0);
+			}
 			if (str[index] == '*')
-				player->piece[(++j) + str_num * player->size[0]] = 1;
+				player->piece[j + str_num * player->size_piece[1]] = 1;
 			else
-				player->piece[(++j) + str_num * player->size[0]] = 0;
+				player->piece[j + str_num * player->size_piece[1]] = 0;
 			index++;
+			j++;
 		}
 		str_num++;
+		free(str);
 	}
 	return (1);
 }

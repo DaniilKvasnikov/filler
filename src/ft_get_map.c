@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 14:58:55 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:41:20 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int
 		while (str[index] != '\0' && str[index] != ' ')
 			index++;
 		if (str[index] == '\0' || str[index + 1] == '\0')
+		{
+			free(str);
 			return (0);
+		}
 		index++;
 		j = -1;
 		while (str[index] != '\0')
@@ -41,7 +44,10 @@ int
 			++j;
 			if (!(str[index] == '.' || str[index] == 'x' || str[index] == 'X' ||
 			str[index] == 'o' || str[index] == 'O'))
+			{
+				free(str);
 				return (0);
+			}
 			if (str[index] != '.')
 			{
 				if (str[index] == 'x' || str[index] == 'X')
@@ -54,6 +60,7 @@ int
 			index++;
 		}
 		str_num++;
+		free(str);
 	}
 	return (1);
 }

@@ -94,6 +94,17 @@ t_vect_int
 }
 
 int
+	to_exit
+	(t_player *player)
+{
+	if (player->map != NULL)
+		free(player->map);
+	if (player->piece != NULL)
+		free(player->piece);
+	return (0);
+}
+
+int
 	main
 	(void)
 {
@@ -102,18 +113,21 @@ int
 
 	ft_init_player(&player);
 	if ((player.num = ft_get_num()) == -1)
-		return (0);
-	if (!ft_get_map_size(&player))
-		return (0);
-	if (!ft_get_map(&player))
-		return (0);
-	if (!get_piece_size(&player))
-		return (0);
-	if (!ft_get_piece(&player))
-		return (0);
-	vect = ft_get_pos(&player);
-	// ft_print_map(player);
-	// ft_print_piece(player);
-	ft_printf("%d %d\n", vect.x, vect.y);
+		return (to_exit(&player));
+	while (1)
+	{
+		if (!ft_get_map_size(&player))
+			return (to_exit(&player));
+		if (!ft_get_map(&player))
+			return (to_exit(&player));
+		if (!get_piece_size(&player))
+			return (to_exit(&player));
+		if (!ft_get_piece(&player))
+			return (to_exit(&player));
+		vect = ft_get_pos(&player);
+		// ft_print_map(player);
+		// ft_print_piece(player);
+		ft_printf("%d %d\n", vect.x, vect.y);
+	}
 	return 0;
 }

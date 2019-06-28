@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 13:52:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:39:24 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ int
 		while (*(str + 8 + i) != ' ' && *(str + 8 + i + 1) != '\0')
 			i++;
 		player->size[1] = ft_atoi(str + 8 + i);
+		if (player->map != 0)
+			free(player->map);
 		player->map =
 			(char *)malloc(sizeof(char) * (player->size[0] * player->size[1]));
+		free(str);
 		return (1);
 	}
+	free(str);
 	return (0);
 }
