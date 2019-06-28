@@ -6,12 +6,12 @@
 #    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/27 14:25:41 by rrhaenys          #+#    #+#              #
-#    Updated: 2019/01/30 19:46:02 by rrhaenys         ###   ########.fr        #
+#    Updated: 2019/06/28 16:52:18 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -Werror
 SRC_DIR = src/
 SRC_FIL = $(shell ls src | grep -E "ft_.+\.c")
 SRCS = $(addprefix  $(SRC_DIR), $(SRC_FIL))

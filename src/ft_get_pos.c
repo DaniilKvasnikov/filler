@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 16:44:11 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 17:39:38 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ t_vect_int
 	ft_get_pos
 	(t_player *player)
 {
-	int i;
-	int j;
+	int				i;
+	int				j;
+	t_list_filler	*list;
 
 	i = 0;
+	list = NULL;
 	while (i < player->size[0])
 	{
 		j = 0;
@@ -50,12 +52,12 @@ t_vect_int
 		{
 			if (ft_piece_can_push(player, (t_vect_int){i, j}))
 			{
+				list = add_list_filler(list, (t_vect_int){i, j});
 				ft_piece_push(player, (t_vect_int){i, j});
-				return ((t_vect_int){i, j});
 			}
 			j++;
 		}
 		i++;
 	}
-	return ((t_vect_int){0, 0});
+	return (ft_get_pos_res(list));
 }
