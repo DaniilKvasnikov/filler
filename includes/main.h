@@ -7,7 +7,8 @@
 typedef struct	s_player
 {
     int         num;
-    char        ch;
+    char        *map;
+    int         size[2];
 }				t_player;
 
 #endif
