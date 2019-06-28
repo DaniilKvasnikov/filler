@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:41:46 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 17:39:28 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 17:53:15 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int				to_exit(t_player *player);
 void			ft_print_map(t_player player);
 void			ft_print_piece(t_player player);
 
-
 t_list_filler	*create_list_filler(t_vect_int vect);
 t_list_filler	*add_list_filler(t_list_filler *start, t_vect_int vect);
+void			destroy_list_filler(t_list_filler *list);
 
 #endif

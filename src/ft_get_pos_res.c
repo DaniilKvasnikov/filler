@@ -6,21 +6,20 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 17:46:39 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 17:52:56 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_filler.h"
 
-void
-	destroy_list_filler
+static t_vect_int
+	vect_res
 	(t_list_filler *list)
 {
-	if (list == NULL)
-		return;
-	if (list->next != NULL)
-		destroy_list_filler(list->next);
-	free(list);
+	t_vect_int	res;
+
+	res = (list->vect);
+	return (res);
 }
 
 t_vect_int
@@ -31,7 +30,7 @@ t_vect_int
 
 	res = (t_vect_int){0, 0};
 	if (list != NULL)
-		res = (list->vect);
+		res = vect_res(list);
 	destroy_list_filler(list);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 17:33:34 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 17:53:22 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,15 @@ t_list_filler
 		index = index->next;
 	index->next = obj;
 	return (start);
+}
+
+void
+	destroy_list_filler
+	(t_list_filler *list)
+{
+	if (list == NULL)
+		return ;
+	if (list->next != NULL)
+		destroy_list_filler(list->next);
+	free(list);
 }
