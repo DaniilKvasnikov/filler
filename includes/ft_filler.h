@@ -15,6 +15,8 @@
 
 # include "ft_printf.h"
 
+#define ABS(x)  (x<0)?-x:x
+
 typedef struct	s_player
 {
 	int			num;
@@ -22,6 +24,8 @@ typedef struct	s_player
 	char		*piece;
 	int			size[2];
 	int			size_piece[2];
+	float		piece_center[2];
+	int			piece_count;
 }				t_player;
 
 typedef struct	s_vect_int
@@ -44,7 +48,7 @@ int				get_piece_size(t_player *player);
 int				ft_get_piece(t_player *player);
 t_vect_int		ft_get_pos(t_player *player);
 int				ft_piece_can_push(t_player *player, t_vect_int vect);
-t_vect_int		ft_get_pos_res(t_list_filler *list);
+t_vect_int		ft_get_pos_res(t_list_filler *list, t_player *player);
 
 int				ft_free_str(char *str);
 int				to_exit(t_player *player);

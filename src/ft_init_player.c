@@ -21,4 +21,7 @@ void
 	player->piece = 0;
 	player->size[0] = 0;
 	player->size[1] = 0;
+	player->piece_center[0] = 0;
+	player->piece_center[1] = 0;
+	player->piece_count = 0;
 }

@@ -42,6 +42,7 @@ t_vect_int
 	int				i;
 	int				j;
 	t_list_filler	*list;
+	int				n;
 
 	i = 0;
 	list = NULL;
@@ -50,14 +51,11 @@ t_vect_int
 		j = 0;
 		while (j < player->size[1])
 		{
-			if (ft_piece_can_push(player, (t_vect_int){i, j}))
-			{
+			if ((n = ft_piece_can_push(player, (t_vect_int){i, j})) == 1)
 				list = add_list_filler(list, (t_vect_int){i, j});
-				ft_piece_push(player, (t_vect_int){i, j});
-			}
 			j++;
 		}
 		i++;
 	}
-	return (ft_get_pos_res(list));
+	return (ft_get_pos_res(list, player));
 }

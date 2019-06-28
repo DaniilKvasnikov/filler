@@ -20,9 +20,15 @@ static void
 	int j)
 {
 	if (c == '*')
+	{
+		player->piece_center[0] += str_num;
+		player->piece_center[1] += j;
+		player->piece_count++;
 		player->piece[j + str_num * player->size_piece[1]] = 1;
+	}
 	else
 		player->piece[j + str_num * player->size_piece[1]] = 0;
+
 }
 
 int
@@ -52,5 +58,7 @@ int
 		str_num++;
 		free(str);
 	}
+	player->piece_center[0] = player->piece_center[0] / (float)player->piece_count;
+	player->piece_center[1] = player->piece_center[1] / (float)player->piece_count;
 	return (1);
 }
