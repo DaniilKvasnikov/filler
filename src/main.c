@@ -1,41 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rrhaenys <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/06/28 13:50:25 by rrhaenys         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 int
-	ft_get_num
-	(void)
+	ft_piece_can_push
+	(t_player *player,
+	t_vect_int vect)
 {
-	char	*str;
-	int		num;
+	int i_p;
+	int j_p;
+	int	trig;
 
-	num = -1;
-	if (get_next_line(0, &str) != 1)
-		return (-1);
-	if ((ft_strncmp(str, "$$$ exec p", 10) == 0) &&
-		(str[10] == '1' || str[10] == '2'))
-			num = (str[10] - '0');
-	free(str);
-	return (num);
+	if ((vect.x + player->size_piece[0]) > player->size[0])
+		return (0);
+	if ((vect.y + player->size_piece[1]) > player->size[1])
+		return (0);
+	trig = 0;
+	i_p = 0;
+	while (i_p < player->size_piece[0])
+	{
+		j_p = 0;
+		while (j_p < player->size_piece[1])
+		{
+			if (player->piece[i_p * player->size_piece[1] + j_p])
+			{
+				if (player->map[(vect.x + i_p) * player->size[1] + (vect.y + j_p)] == 1)
+					trig++;
+				else if (player->map[(vect.x + i_p) * player->size[1] + (vect.y + j_p)] == 2)
+					return (0);
+			}
+			j_p++;
+		}
+		i_p++;
+	}
+	return (trig == 1);
 }
 
-int
-	ft_get_map
+void
+	ft_piece_push
+	(t_player *player,
+	t_vect_int vect)
+{
+	int i_p;
+	int j_p;
+
+	i_p = 0;
+	while (i_p < player->size_piece[0])
+	{
+		j_p = 0;
+		while (j_p < player->size_piece[1])
+		{
+			if (player->piece[i_p * player->size_piece[1] + j_p])
+				player->map[(vect.x + i_p) * player->size[1] + (vect.y + j_p)] = 1;
+			j_p++;
+		}
+		i_p++;
+	}
+}
+
+t_vect_int
+	ft_get_pos
 	(t_player *player)
 {
-	char	*str;
-	int		i;
-	
-	if (get_next_line(0, &str) != 1)
-		return (0);
-	if ((ft_strncmp(str, "Plateau ", 8) == 0))
+	int i;
+	int j;
+
+	i = 0;
+	while (i < player->size[0])
 	{
-		player->size[0] = ft_atoi(str + 8);
-		i = 0;
-		while (*(str + 8 + i) != ' ' && *(str + 8 + i + 1) != '\0')
-			i++;
-		player->size[1] = ft_atoi(str + 8 + i);
-		return (1);
+		j = 0;
+		while (j < player->size[1])
+		{
+			if (ft_piece_can_push(player, (t_vect_int){i, j}))
+			{
+				ft_piece_push(player, (t_vect_int){i, j});
+				return ((t_vect_int){i, j});
+			}
+			j++;
+		}
+		i++;
 	}
-	return (0);
+	return ((t_vect_int){1, 1});
 }
 
 int
@@ -43,11 +98,22 @@ int
 	(void)
 {
 	t_player	player;
+	t_vect_int	vect;
 
+	ft_init_player(&player);
 	if ((player.num = ft_get_num()) == -1)
+		return (0);
+	if (!ft_get_map_size(&player))
 		return (0);
 	if (!ft_get_map(&player))
 		return (0);
-	ft_printf("%d %d\n", player.size[0], player.size[1]);
+	if (!get_piece_size(&player))
+		return (0);
+	if (!ft_get_piece(&player))
+		return (0);
+	vect = ft_get_pos(&player);
+	// ft_print_map(player);
+	// ft_print_piece(player);
+	ft_printf("%d %d\n", vect.x, vect.y);
 	return 0;
 }

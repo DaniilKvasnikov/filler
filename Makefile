@@ -45,4 +45,7 @@ re: fclean all
 test: all
 	./filler_vm -p1 ./rrhaenys.filler -p2 ./rrhaenys.filler -v -f maps/map00
 
+notmy: all
+	./filler_vm -p1 ./players/abanlin.filler -p2 ./players/carli.filler -v -f maps/map00
+
 .PHONY: clean fclean all re test
