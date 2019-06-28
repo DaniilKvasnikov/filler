@@ -1,56 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_piece.c                                     :+:      :+:    :+:   */
+/*   ft_get_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 16:43:49 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:44:11 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_filler.h"
 
-static void
-	ft_set_piece
-	(char c,
-	t_player *player,
-	int str_num,
-	int j)
+void
+	ft_piece_push
+	(t_player *player,
+	t_vect_int vect)
 {
-	if (c == '*')
-		player->piece[j + str_num * player->size_piece[1]] = 1;
-	else
-		player->piece[j + str_num * player->size_piece[1]] = 0;
+	int i_p;
+	int j_p;
+
+	i_p = 0;
+	while (i_p < player->size_piece[0])
+	{
+		j_p = 0;
+		while (j_p < player->size_piece[1])
+		{
+			if (player->piece[i_p * player->size_piece[1] + j_p])
+				player->map[(vect.x + i_p) * player->size[1] + (vect.y + j_p)] =
+					1;
+			j_p++;
+		}
+		i_p++;
+	}
 }
 
-int
-	ft_get_piece
+t_vect_int
+	ft_get_pos
 	(t_player *player)
 {
-	char	*str;
-	int		index;
-	int		j;
-	int		str_num;
+	int i;
+	int j;
 
-	str_num = 0;
-	while (str_num < player->size_piece[0])
+	i = 0;
+	while (i < player->size[0])
 	{
-		if (get_next_line(0, &str) != 1)
-			return (0);
-		index = 0;
-		if (str[index--] == '\0')
-			ft_free_str(str);
 		j = 0;
-		while (str[++index] != '\0')
+		while (j < player->size[1])
 		{
-			if (str[index] != '.' && str[index] != '*')
-				ft_free_str(str);
-			ft_set_piece(str[index], player, str_num, j++);
+			if (ft_piece_can_push(player, (t_vect_int){i, j}))
+			{
+				ft_piece_push(player, (t_vect_int){i, j});
+				return ((t_vect_int){i, j});
+			}
+			j++;
 		}
-		str_num++;
-		free(str);
+		i++;
 	}
-	return (1);
+	return ((t_vect_int){0, 0});
 }

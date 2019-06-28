@@ -6,11 +6,11 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 15:41:45 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:44:00 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "ft_filler.h"
 
 int
 	get_piece_size
@@ -18,7 +18,7 @@ int
 {
 	char	*str;
 	int		i;
-	
+
 	if (get_next_line(0, &str) != 1)
 		return (0);
 	if ((ft_strncmp(str, "Piece ", 6) == 0))

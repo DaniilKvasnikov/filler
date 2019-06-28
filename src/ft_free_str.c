@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_player.c                                   :+:      :+:    :+:   */
+/*   ft_free_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 16:43:54 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:43:33 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_filler.h"
 
-void
-	ft_init_player
-	(t_player *player)
+int
+	ft_free_str
+	(char *str)
 {
-	player->num = 0;
-	player->map = 0;
-	player->piece = 0;
-	player->size[0] = 0;
-	player->size[1] = 0;
+	free(str);
+	return (0);
 }
