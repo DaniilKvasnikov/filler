@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 15:54:07 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/29 18:07:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,12 @@ static t_vect_int
 	res = list->vect;
 	center = (t_vect_int){res.x + player->piece_center[0],
 							res.y + player->piece_center[1]};
-	// min = ABS(center.x - center.y);
 	min = dist_player(player, center);
 	while (list != NULL)
 	{
 		index_v = list->vect;
 		center = (t_vect_int){index_v.x + player->piece_center[0],
 								index_v.y + player->piece_center[1]};
-		// index_m = ABS(center.x - center.y);
 		index_m = dist_player(player, center);
 		if (index_m < min)
 		{

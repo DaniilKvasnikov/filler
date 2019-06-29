@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:41:46 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 17:53:15 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:15:18 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_player
 	int			size_piece[2];
 	float		piece_center[2];
 	int			piece_count;
+	char		*name;
 }				t_player;
 
 typedef struct	s_vect_int
@@ -41,7 +42,7 @@ typedef struct	s_list_f
 }				t_list_filler;
 
 void			ft_init_player(t_player *player);
-int				ft_get_num(void);
+int				ft_get_num(t_player *player);
 int				ft_get_map_size(t_player *player);
 int				ft_get_map(t_player *player);
 int				get_piece_size(t_player *player);

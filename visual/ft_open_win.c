@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 16:46:58 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/29 18:29:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int
 
 void		ft_start_game(t_data *data)
 {
-	data->mydata->run = 0;
+	data->mydata->run = 1;
 	skeep_str();
 	skeep_str();
 	skeep_str();
@@ -34,11 +34,11 @@ void		ft_start_game(t_data *data)
 	skeep_str();
 	skeep_str();
 	ft_init_player(&data->mydata->player1);
-	if ((data->mydata->player1.num = ft_get_num()) == -1)
+	if ((data->mydata->player1.num = ft_get_num(&data->mydata->player1)) == -1)
 		to_exit(&data->mydata->player1);
 	skeep_str();
 	ft_init_player(&data->mydata->player2);
-	if ((data->mydata->player2.num = ft_get_num()) == -1)
+	if ((data->mydata->player2.num = ft_get_num(&data->mydata->player2)) == -1)
 		to_exit(&data->mydata->player2);
 }
 
@@ -47,7 +47,7 @@ int				key_press(int key, t_data *data)
 	if (key == 53)
 		ft_close(data);
 	else if (key == 49)
-		data->mydata->run = 2;
+		data->mydata->run = 1;
 	return (1);
 	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 16:00:21 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:13:41 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int
 	ft_get_num
-	(void)
+	(t_player *player)
 {
 	char	*str;
 	int		num;
@@ -26,5 +26,5 @@ int
 		(str[10] == '1' || str[10] == '2'))
 		num = (str[10] - '0');
 	free(str);
-	return (num);
+	return (player->num = num);
 }

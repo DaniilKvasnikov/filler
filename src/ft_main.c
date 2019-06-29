@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:19:00 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 16:44:08 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:13:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int
 	t_vect_int	vect;
 
 	ft_init_player(&player);
-	if ((player.num = ft_get_num()) == -1)
+	if ((player.num = ft_get_num(&player)) == -1)
 		return (to_exit(&player));
 	while (1)
 	{
