@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 16:43:49 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:43:50 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,9 @@ static void
 	int j)
 {
 	if (c == '*')
-	{
-		player->piece_center[0] += str_num;
-		player->piece_center[1] += j;
-		player->piece_count++;
 		player->piece[j + str_num * player->size_piece[1]] = 1;
-	}
 	else
 		player->piece[j + str_num * player->size_piece[1]] = 0;
-
 }
 
 int
@@ -40,8 +34,8 @@ int
 	int		j;
 	int		str_num;
 
-	str_num = 0;
-	while (str_num < player->size_piece[0])
+	str_num = -1;
+	while (++str_num < player->size_piece[0])
 	{
 		if (get_next_line(0, &str) != 1)
 			return (0);
@@ -55,10 +49,7 @@ int
 				ft_free_str(str);
 			ft_set_piece(str[index], player, str_num, j++);
 		}
-		str_num++;
 		free(str);
 	}
-	player->piece_center[0] = player->piece_center[0] / (float)player->piece_count;
-	player->piece_center[1] = player->piece_center[1] / (float)player->piece_count;
 	return (1);
 }

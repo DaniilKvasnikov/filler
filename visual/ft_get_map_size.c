@@ -6,11 +6,22 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/30 14:25:04 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:58:09 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_filler.h"
+
+static void
+	ft_first_start
+	(t_player *player)
+{
+	if (player->map != 0)
+	{
+		free(player->map);
+		free(player->h);
+	}
+}
 
 int
 	ft_get_map_size
@@ -28,11 +39,7 @@ int
 		while (*(str + 8 + i) != ' ' && *(str + 8 + i + 1) != '\0')
 			i++;
 		player->size[1] = ft_atoi(str + 8 + i);
-		if (player->map != 0)
-		{
-			free(player->map);
-			free(player->h);
-		}
+		ft_first_start(player);
 		player->map =
 			(char *)malloc(sizeof(char) * (player->size[0] * player->size[1]));
 		player->h =

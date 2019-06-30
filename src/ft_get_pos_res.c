@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/30 13:10:42 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:51:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int
 	int		i;
 	int		j;
 	int		res;
+	int		x;
+	int		y;
 
 	i = -1;
 	res = 0;
@@ -30,10 +32,10 @@ static int
 		{
 			if (player->piece[i * player->size[1] + j] == 1)
 			{
-				if (player->map[(i + pos.x) * player->size[1] + (j + pos.y)] == 0)
-				{
-					res += player->h[(i + pos.x) * player->size[1] + (j + pos.y)];
-				}
+				x = i + pos.x;
+				y = j + pos.y;
+				if (player->map[(x) * player->size[1] + (y)] == 0)
+					res += player->h[(x) * player->size[1] + (y)];
 			}
 		}
 	}
@@ -56,7 +58,6 @@ static t_vect_int
 	{
 		index_v = list->vect;
 		index_m = dist_player(player, index_v);
-		// ft_printf("%d %d = %d\n", index_v.x, index_v.y, index_m);
 		if ((index_m > max && index_m < 0) || max >= 0)
 		{
 			max = index_m;

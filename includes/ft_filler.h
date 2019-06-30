@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:41:46 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/30 11:21:29 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 15:10:46 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define FT_FILLER_H
 
 # include "ft_printf.h"
-
-#define ABS(x)  (x<0)?-x:x
 
 typedef struct	s_player
 {
@@ -25,8 +23,6 @@ typedef struct	s_player
 	char		*piece;
 	int			size[2];
 	int			size_piece[2];
-	float		piece_center[2];
-	int			piece_count;
 	char		*name;
 }				t_player;
 
@@ -61,5 +57,8 @@ void			ft_print_piece(t_player player);
 t_list_filler	*create_list_filler(t_vect_int vect);
 t_list_filler	*add_list_filler(t_list_filler *start, t_vect_int vect);
 void			destroy_list_filler(t_list_filler *list);
+
+int				calc_h_map(t_player *player);
+int				h_max(int s[4]);
 
 #endif

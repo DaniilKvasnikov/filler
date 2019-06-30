@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/30 11:03:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:44:24 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,4 @@ void
 	player->piece = 0;
 	player->size[0] = 0;
 	player->size[1] = 0;
-	player->piece_center[0] = 0;
-	player->piece_center[1] = 0;
-	player->piece_count = 0;
 }

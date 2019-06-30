@@ -6,10 +6,9 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:41:46 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/30 14:30:09 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 15:12:36 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_FILLER_VIS_H
 # define FT_FILLER_VIS_H
@@ -52,9 +51,11 @@ typedef struct	s_data
 	t_mydata	*mydata;
 }				t_data;
 
-void		ft_open_win(char *str);
-int			ft_draw(t_data *data);
-int			ft_close(t_data *data);
-void		ft_clearwin(t_data *data);
+void			ft_open_win(char *str);
+int				ft_draw(t_data *data);
+int				ft_close(t_data *data);
+void			ft_clearwin(t_data *data);
+void			set_map(char c, int *color, char *str, t_mydata *data);
+void			ft_draw_map(t_player *player, t_data *data);
 
 #endif

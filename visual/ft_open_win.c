@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/30 14:31:25 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:58:31 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int
 	return (1);
 }
 
-void		ft_start_game(t_data *data)
+void
+	ft_start_game(t_data *data)
 {
 	data->mydata->run = 1;
 	data->mydata->status = 1;
@@ -43,7 +44,8 @@ void		ft_start_game(t_data *data)
 		to_exit(&data->mydata->player2);
 }
 
-int				key_press(int key, t_data *data)
+int
+	key_press(int key, t_data *data)
 {
 	if (key == 53)
 		ft_close(data);
@@ -55,12 +57,12 @@ int				key_press(int key, t_data *data)
 		data->mydata->status = 2;
 	else if (key == 20)
 		data->mydata->status = 3;
-	ft_printf("key = %d\n", key);
 	return (1);
 	free(data);
 }
 
-void		ft_open_win(char *str)
+void
+	ft_open_win(char *str)
 {
 	t_data	data;
 
