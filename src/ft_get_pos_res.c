@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 18:07:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 13:10:42 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@ static int
 {
 	int		i;
 	int		j;
-	float	dist;
-	int		min;
+	int		res;
 
 	i = -1;
-	min = 0;
-	while (++i < player->size[0])
+	res = 0;
+	while (++i < player->size_piece[0])
 	{
 		j = -1;
-		while (++j < player->size[1])
+		while (++j < player->size_piece[1])
 		{
-			if (player->map[i * player->size[1] + j] == 2)
+			if (player->piece[i * player->size[1] + j] == 1)
 			{
-				dist = (i - pos.x) * (i - pos.x) + (j - pos.y) * (j - pos.y);
-				if (min == 0 || dist < min)
-					min = dist;
+				if (player->map[(i + pos.x) * player->size[1] + (j + pos.y)] == 0)
+				{
+					res += player->h[(i + pos.x) * player->size[1] + (j + pos.y)];
+				}
 			}
 		}
 	}
-	return (min);
+	return (res);
 }
 
 static t_vect_int
@@ -46,24 +46,20 @@ static t_vect_int
 	t_player *player)
 {
 	t_vect_int	res;
-	t_vect_int	center;
 	t_vect_int	index_v;
-	float		min;
-	float		index_m;
+	int			max;
+	int			index_m;
 
 	res = list->vect;
-	center = (t_vect_int){res.x + player->piece_center[0],
-							res.y + player->piece_center[1]};
-	min = dist_player(player, center);
+	max = dist_player(player, res);
 	while (list != NULL)
 	{
 		index_v = list->vect;
-		center = (t_vect_int){index_v.x + player->piece_center[0],
-								index_v.y + player->piece_center[1]};
-		index_m = dist_player(player, center);
-		if (index_m < min)
+		index_m = dist_player(player, index_v);
+		// ft_printf("%d %d = %d\n", index_v.x, index_v.y, index_m);
+		if ((index_m > max && index_m < 0) || max >= 0)
 		{
-			min = index_m;
+			max = index_m;
 			res = list->vect;
 		}
 		list = list->next;

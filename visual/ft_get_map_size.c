@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 16:11:36 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:25:04 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,13 @@ int
 			i++;
 		player->size[1] = ft_atoi(str + 8 + i);
 		if (player->map != 0)
+		{
 			free(player->map);
+			free(player->h);
+		}
 		player->map =
+			(char *)malloc(sizeof(char) * (player->size[0] * player->size[1]));
+		player->h =
 			(char *)malloc(sizeof(char) * (player->size[0] * player->size[1]));
 		free(str);
 		return (1);

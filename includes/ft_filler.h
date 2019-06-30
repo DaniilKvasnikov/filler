@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:41:46 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 17:15:18 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 11:21:29 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_player
 {
 	int			num;
 	char		*map;
+	char		*h;
 	char		*piece;
 	int			size[2];
 	int			size_piece[2];

@@ -6,11 +6,46 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:08:31 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 18:37:07 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:30:02 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_filler_vis.h"
+
+static void
+	set_map
+	(char c,
+	int *color,
+	char *str,
+	t_mydata *data)
+{
+	if (c == 1)
+	{
+		*color = 0x008800;
+		*str = 'O';
+		data->p1++;
+	}
+	else if (c == 3)
+	{
+		*color = 0x00ff00;
+		*str = 'o';
+		data->p1++;
+	}
+	else if (c == 2)
+	{
+		*color = 0x880000;
+		*str = 'X';
+		data->p2++;
+	}
+	else if (c == 4)
+	{
+		*color = 0xff0000;
+		*str = 'x';
+		data->p2++;
+	}
+	else if (c == 0)
+		*color = 0xffffff;
+}
 
 void		ft_draw_map(t_player *player, t_data *data)
 {
@@ -19,24 +54,29 @@ void		ft_draw_map(t_player *player, t_data *data)
 	char	*str;
 	int		color;
 
+	data->mydata->p1 = 0;
+	data->mydata->p2 = 0;
 	i = 0;
 	while (i < player->size[0])
 	{
 		j = 0;
 		while (j < player->size[1])
 		{
-			color = 0xffffff;
-			if (player->map[i * player->size[1] + j] == 1)
-				color = 0x00ff00;
-			else if (player->map[i * player->size[1] + j] == 2)
-				color = 0xff0000;
-			else if (player->map[i * player->size[1] + j] == 3)
-				color = 0x008800;
-			else if (player->map[i * player->size[1] + j] == 4)
-				color = 0x880000;
-			str = ft_itoa(player->map[i * player->size[1] + j]);
-			mlx_string_put(data->mlx_ptr, data->mlx_win,
-			i * HOR + 10, j * VER + 10, color, str);
+			str = ft_strdup(".");
+			set_map(player->map[i * player->size[1] + j], &color, str, data->mydata);
+			if (data->mydata->status == 1)
+				mlx_string_put(data->mlx_ptr, data->mlx_win,
+				i * HOR + 7, j * VER + 7, color, str);
+			else
+			{
+				if (data->mydata->status == 2)
+				{
+					free(str);
+					str = ft_itoa(player->h[i * player->size[1] + j]);
+				}
+				mlx_string_put(data->mlx_ptr, data->mlx_win,
+				i * HOR_DOP + 7, j * VER + 7, color, str);
+			}
 			free(str);
 			j++;
 		}
@@ -119,31 +159,47 @@ int
 	return (0);
 }
 
+void		ft_print_info(t_data *data)
+{
+	char	*str;
+
+	str = ft_itoa(data->mydata->p1);
+	mlx_string_put(data->mlx_ptr, data->mlx_win,
+	WIN_W - 550, 10, 0x00ff00, str);
+	free(str);
+	mlx_string_put(data->mlx_ptr, data->mlx_win,
+	WIN_W - 500, 10, 0x00ff00, data->mydata->player1.name);
+	str = ft_itoa(data->mydata->p2);
+	mlx_string_put(data->mlx_ptr, data->mlx_win,
+	WIN_W - 550, 30, 0xff0000, str);
+	free(str);
+	mlx_string_put(data->mlx_ptr, data->mlx_win,
+	WIN_W - 500, 30, 0xff0000, data->mydata->player2.name);
+}
+
 int			ft_draw(t_data *data)
 {
-	if (data->mydata->run <= 0)
-		return (1);
-	data->mydata->run--;
-	if (!ft_get_map_size(&data->mydata->player1))
-		return (1);
-	if (!ft_get_map(&data->mydata->player1))
-		return (1);
-	if (!get_piece_size(&data->mydata->player1))
-		return (1);
-	if (!ft_get_piece(&data->mydata->player1))
-		return (1);
-	if (!ft_get_step(&data->mydata->player1, data))
-		return (1);
+	if (data->mydata->run > 0)
+	{
+		data->mydata->run--;
+		if (!ft_get_map_size(&data->mydata->player1))
+			return (1);
+		if (!ft_get_map(&data->mydata->player1))
+			return (1);
+		if (!get_piece_size(&data->mydata->player1))
+			return (1);
+		if (!ft_get_piece(&data->mydata->player1))
+			return (1);
+		if (!ft_get_step(&data->mydata->player1, data))
+			return (1);
+	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img->img_ptr, 0, 0);
-	mlx_string_put(data->mlx_ptr, data->mlx_win,
-	10, WIN_H - 50, 0x00ff00, data->mydata->player1.name);
-	mlx_string_put(data->mlx_ptr, data->mlx_win,
-	10, WIN_H - 30, 0xff0000, data->mydata->player2.name);
 	if (data->mydata->player1.map != NULL)
 	{
 		ft_draw_map(&data->mydata->player1, data);
 		ft_draw_piece(&data->mydata->player1, data);
 	}
+	ft_print_info(data);
 	return (1);
 }

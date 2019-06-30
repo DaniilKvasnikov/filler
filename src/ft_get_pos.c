@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/29 18:22:05 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 12:49:15 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ t_vect_int
 		while (j < player->size[1])
 		{
 			if ((n = ft_piece_can_push(player, (t_vect_int){i, j})) == 1)
+			{
 				list = add_list_filler(list, (t_vect_int){i, j});
+			}
 			j++;
 		}
 		i++;

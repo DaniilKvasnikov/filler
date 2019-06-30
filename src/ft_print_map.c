@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 13:50:23 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/06/28 16:43:57 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/06/30 13:03:54 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void
 	ft_printf("  ");
 	while (j < player.size[1])
 	{
-		ft_printf("%d ", j % 10);
+		ft_printf("%3d ", j % 10);
 		j++;
 	}
 	ft_printf("\n");
 	i = 0;
 	while (i < player.size[0])
 	{
-		ft_printf("%d ", i % 10);
+		ft_printf("%3d ", i % 10);
 		j = 0;
 		while (j < player.size[1])
 		{
-			ft_printf("%d ", player.map[i * player.size[1] + j]);
+			ft_printf("%3d ", -player.h[i * player.size[1] + j]);
 			j++;
 		}
 		ft_printf("\n");
@@ -55,7 +55,7 @@ void
 		j = 0;
 		while (j < player.size_piece[1])
 		{
-			ft_printf("%d ", player.piece[i * player.size_piece[1] + j]);
+			// ft_printf("%d ", player.piece[i * player.size_piece[1] + j]);
 			j++;
 		}
 		ft_printf("\n");
